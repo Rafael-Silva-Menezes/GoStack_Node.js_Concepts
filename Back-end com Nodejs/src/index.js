@@ -1,8 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const { uuid, isUuid } = require("uuidv4");
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
+
 const projects = [];
 
 function logRequests(request, response, next) {
@@ -53,7 +57,7 @@ app.put("/projects/:id", (request, response) => {
   if (projectIndex < 0) {
     return response.status(404).json({ error: "Project not found." });
   }
-  
+
   const project = {
     id,
     title,
